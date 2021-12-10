@@ -21,6 +21,8 @@ module.exports.launch = async ({
   format: (a) => a,
   parts: []
 }) => {
+  console.log()
+  console.log('Day n°' + path.basename(path.dirname(inputsDir)))
   await PromiseB.mapSeries(tutos, async (tuto, i) => {
     const file = tuto.path || 'tuto'
     const parsed = module.exports.parse(path.resolve(inputsDir, file), format)

@@ -1,5 +1,5 @@
 const path = require('path')
-const {launch} = require('../utilities')
+const {launch} = require('../../utilities')
 
 launch({
   inputsDir: path.resolve(__dirname, 'inputs'),

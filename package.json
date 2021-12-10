@@ -6,6 +6,7 @@
   "scripts": {
     "serve": "nodemon ",
     "start": "node ",
+    "all": "for d in ./days/*/ ; do (cd \"$d\" && node index.js); done",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
