@@ -1,5 +1,5 @@
 const path = require('path')
-const {arraySum, launch} = require('../../utilities')
+const {launch} = require('../../utilities')
 
 launch({
   inputsDir: path.resolve(__dirname, 'inputs'),
@@ -17,41 +17,57 @@ launch({
     })
   },
   tutos: [{
-    shouldBe: 26,
+    shouldBe: 5,
     exec: (content) => {
       return guess(content)
-      return 'ok'
     }
-  }],
+  }, {
+      shouldBe: 12,
+      exec: (content) => {
+        return guess(content, true)
+      }
+    }],
 
   parts: [
-    // (content) => guess(content, ),
-    // (content) => guess(content, )
+    (content) => guess(content, ),
+    (content) => guess(content, true)
   ]
 }).catch(console.error)
 
-/**
- * 
- * @param {Wind[]} array 
- */
-function guess(winds) {
+function guess(winds, keepDiagonal= false) {
   const graph = new Map()
   winds.map(({x1, x2, y1, y2}) => {
-    const rad = Math.atan2(y2 - y1, x2 - x1)
-    const deg = radiansToDegrees(rad)
-    let direction = 0
-    if(deg) direction = deg < 180 ? 1 : -1
-    // while(x1 !== x2  || y1 !== y2) {
-    //   x1 = x1 + direction
-    //   y1 = y1 + (direction * 1/Math.tan(rad))
-    //   console.log(rad)
-    // }
-    console.log(x1, y1, x2, y2)
-    process.exit(1)
+    if (x1 === x2) {
+      const min = y1 < y2 ? y1 : y2
+      const max = y1 > y2 ? y1 : y2
+      for (let y = min; y <= max; y++) {
+        increaseGraphValue(graph, x1, y)
+      }
+    } else if (y1 === y2) {
+      const min = x1 < x2 ? x1 : x2
+      const max = x1 > x2 ? x1 : x2
+      for (let x = min; x <= max; x++) {
+        increaseGraphValue(graph, x, y1)
+      }
+    } else if(keepDiagonal){
+      const minPoint = x1 < x2 ? { x:x1, y:y1 } : { x:x2, y:y2 }
+      const maxPoint = x1 > x2 ? { x:x1, y:y1 } : { x:x2, y:y2 }
+      const direction = minPoint.y > maxPoint.y ? -1 : 1
+      let y = minPoint.y
+      increaseGraphValue(graph, minPoint.x, minPoint.y)
+      for (let x = minPoint.x + 1; x <= maxPoint.x; x++) {
+        increaseGraphValue(graph, x, y += direction)
+      }
+    }
   })
-  console.log(winds)
+  const nbOverlaps = [...graph.values()].filter((a) => a >= 2).length
+  return nbOverlaps
 }
 
+function increaseGraphValue(graph, x, y) {
+  const key = `${x}:${y}`
+  graph.set(key, graph.get(key) + 1 || 1)
+}
 /**
  * @typedef Wind
  * @property {number} x1
@@ -59,8 +75,3 @@ function guess(winds) {
  * @property {number} y1
  * @property {number} y2
  */
-
-function radiansToDegrees(radians) {
-  var pi = Math.PI;
-  return radians * (180 / pi);
-}
