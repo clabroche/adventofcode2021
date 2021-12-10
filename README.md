@@ -6,5 +6,5 @@
 
 ## Usage
 
-``` npm run start -- 08```
-``` npm run serve -- 08```
+``` npm run start -- days/08```
+``` npm run serve -- dayjs/08```
