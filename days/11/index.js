@@ -52,6 +52,7 @@ class Board {
         board[y][x].on('flashing', ()=> this.allFlashing++)
       })
     })
+    console.
     this.board = board
     this.h = this.board.length
     this.w = this.board[0].length
