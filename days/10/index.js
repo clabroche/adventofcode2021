@@ -13,10 +13,10 @@ launch({
     shouldBe: 26397,
     exec: (content) => part1(content)
   },
-    // {
-    //   shouldBe: 288957,
-    //   exec: (content) => part2(content)
-    // }
+    {
+      shouldBe: 288957,
+      exec: (content) => part2(content)
+    }
   ],
 
   parts: [
