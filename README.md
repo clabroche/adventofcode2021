@@ -10,7 +10,7 @@
 
 ``` npm run serve -- dayjs/08```
 
-``` npm run all```
+``` npm run all``` (only on linux)
 
 ## CI
 
