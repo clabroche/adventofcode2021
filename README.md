@@ -7,4 +7,11 @@
 ## Usage
 
 ``` npm run start -- days/08```
+
 ``` npm run serve -- dayjs/08```
+
+``` npm run all```
+
+## CI
+
+Tests are launch on CI on each push
