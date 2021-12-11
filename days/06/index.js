@@ -27,7 +27,7 @@ launch({
     (content) => guess(content, 80),
     (content) => guess(content, 256)
   ]
-}).catch(console.error)
+}).catch(err => {console.error(err); process.exit(1)})
 
 function guess([original, newFishes, ...others], turn) {
   for (let i = 0; i < turn; i++) {

@@ -31,7 +31,7 @@ launch({
     (content) => guess(content, [1, 4, 7, 8]),
     (content) => guess2(content)
   ]
-}).catch(console.error)
+}).catch(err => {console.error(err); process.exit(1)})
 
 const guesses = {
   1: (input) => input.length === 2,

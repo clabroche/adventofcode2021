@@ -23,7 +23,7 @@ launch({
     (content) => guess(content),
     (content) => part2(content),
   ]
-}).catch(console.error)
+}).catch(err => {console.error(err); process.exit(1)})
 
 function guess(content) {
   let position = {

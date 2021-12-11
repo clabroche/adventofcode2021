@@ -32,7 +32,7 @@ launch({
     (content) => guess(content, ),
     (content) => guess(content, true)
   ]
-}).catch(console.error)
+}).catch(err => {console.error(err); process.exit(1)})
 
 function guess(winds, keepDiagonal= false) {
   const graph = new Map()

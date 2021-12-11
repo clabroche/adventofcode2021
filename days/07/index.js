@@ -24,7 +24,7 @@ launch({
     (content) => getFuelFromMedian(content),
     (content) => searchFuel(content)
   ]
-}).catch(console.error)
+}).catch(err => {console.error(err); process.exit(1)})
 
 function getFuelFromMedian(content) {
   content.sort((a, b) => b - a)
